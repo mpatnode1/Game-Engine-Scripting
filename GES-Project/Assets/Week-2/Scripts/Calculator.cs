@@ -43,7 +43,7 @@ public class Calculator : MonoBehaviour
         //DONE: Add the input passed into the AddInput function to the current value of the label
         //      Hint. You can perform the + operations on string data to combine them
 
-        Label.text += input;
+        Label.text = (float.Parse(Label.text) + float.Parse(input)).ToString();
     }
 
     public void SetEquationAsAdd()
@@ -71,7 +71,7 @@ public class Calculator : MonoBehaviour
         equationType = EquationType.SUBTRACT;
     }
 
-    //TODO: Create a SetEquationAsMultiply function similar to SetEquationAsAdd.
+    //: Create a SetEquationAsMultiply function similar to SetEquationAsAdd.
     //      Make sure you set equationType to EquationType.Multiply
 
     public void SetEquationAsMultiply()
@@ -81,7 +81,7 @@ public class Calculator : MonoBehaviour
         equationType = EquationType.MULTIPLY;
     }
 
-    //TODO: Create a SetEquationAsDivide function similar to SetEquationAsAdd.
+    //: Create a SetEquationAsDivide function similar to SetEquationAsAdd.
     //      Make sure you set equationType to EquationType.DIVIDE
 
     public void SetEquationAsDivide()
@@ -97,22 +97,43 @@ public class Calculator : MonoBehaviour
         //TODO: Calculate the sum of the float variable that stores the previous input value and the current input value
         //      Set the text label to display that sum
 
-        
+        Label.text = (float.Parse(Label.text) + prevInput).ToString();
+
     }
 
     //TODO: Implement Subtract function
+    public void Subtract()
+    {
+        Label.text = (float.Parse(Label.text) - prevInput).ToString();
 
+    }
 
     //TODO: Implement Multiply function
 
+    public void Multiply()
+    {
+
+        Label.text = (float.Parse(Label.text) * prevInput).ToString();
+
+    }
 
     //TODO: Implement Divide function
 
+    public void Divide()
+    {
+
+        Label.text = (float.Parse(Label.text) / prevInput).ToString();
+
+    }
 
     public void Clear()
     {
         //TODO: Reset the state of your calculator... reset the display value to a 0, reset the bool variable
         //      that represents if the display should be cleared to true, reset the temporary float variable as well to 0
+
+        prevInput = 0.0f;
+        Label.text = "0";
+        clearPrevInput = true;
 
 
         //TODO: Leave this alone
@@ -123,6 +144,9 @@ public class Calculator : MonoBehaviour
     {
         //TODO: Check if equationTypep is Add/Subtract/Multiply/Divide and call the correct function
         if (equationType == EquationType.ADD) Add();
+        if (equationType == EquationType.SUBTRACT) Subtract();
+        if (equationType == EquationType.MULTIPLY) Multiply();
+        if (equationType == EquationType.DIVIDE) Divide();
     }
 
     //TODO: Leave this alone
