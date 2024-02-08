@@ -34,11 +34,13 @@ public class Calculator : MonoBehaviour
 
         if (clearPrevInput == true)
         {
+            
             Label.text = string.Empty;
             clearPrevInput = false;
-
+            
         }
 
+        //prevInput = float.Parse(input);
 
         //DONE: Add the input passed into the AddInput function to the current value of the label
         //      Hint. You can perform the + operations on string data to combine them
@@ -52,14 +54,14 @@ public class Calculator : MonoBehaviour
         //TODO: Store the current input value on the text label into the float variable you created.
         //      Hint. You will need to google float.Parse() and pass in the string value of the label.
 
-        
+
 
         //TODO: Set the bool you made to true so that the next number that gets typed in clears the calculator display.
 
 
         prevInput = float.Parse(Label.text);
-        clearPrevInput = true;
         equationType = EquationType.ADD;
+        clearPrevInput = true;
     }
 
     //TODO: Create a SetEquationAsSubtract function similar to SetEquationAsAdd.
@@ -68,8 +70,8 @@ public class Calculator : MonoBehaviour
     public void SetEquationAsSubtract()
     {
         prevInput = float.Parse(Label.text);
-        clearPrevInput = true;
         equationType = EquationType.SUBTRACT;
+        clearPrevInput = true;
     }
 
     //: Create a SetEquationAsMultiply function similar to SetEquationAsAdd.
@@ -78,8 +80,8 @@ public class Calculator : MonoBehaviour
     public void SetEquationAsMultiply()
     {
         prevInput = float.Parse(Label.text);
-        clearPrevInput = true;
         equationType = EquationType.MULTIPLY;
+        clearPrevInput = true;
     }
 
     //: Create a SetEquationAsDivide function similar to SetEquationAsAdd.
@@ -88,8 +90,8 @@ public class Calculator : MonoBehaviour
     public void SetEquationAsDivide()
     {
         prevInput = float.Parse(Label.text);
-        clearPrevInput = true;
         equationType = EquationType.DIVIDE;
+        clearPrevInput = true;
     }
 
 
@@ -143,6 +145,7 @@ public class Calculator : MonoBehaviour
 
     public void Calculate()
     {
+        
         //TODO: Check if equationTypep is Add/Subtract/Multiply/Divide and call the correct function
         if (equationType == EquationType.ADD) Add();
         if (equationType == EquationType.SUBTRACT) Subtract();
