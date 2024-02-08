@@ -16,7 +16,7 @@ public class Calculator : MonoBehaviour
     //      when typing in values. Example, if we type in the value 402 and then press the + button, the next value I enter
     //      should replace the 402 I previously entered
 
-    public bool clearPrevInput;
+    public bool clearPrevInput = false;
 
     //DONE: Leave this alone
     private EquationType equationType;
@@ -43,7 +43,8 @@ public class Calculator : MonoBehaviour
         //DONE: Add the input passed into the AddInput function to the current value of the label
         //      Hint. You can perform the + operations on string data to combine them
 
-        Label.text = (float.Parse(Label.text) + float.Parse(input)).ToString();
+        //Label.text = (float.Parse(Label.text) + float.Parse(input)).ToString();
+        Label.text += input;
     }
 
     public void SetEquationAsAdd()
