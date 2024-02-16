@@ -3287,7 +3287,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1659424659}
         m_TargetAssemblyTypeName: Calculator, Assembly-CSharp
-        m_MethodName: Calculate
+        m_MethodName: SetEquationAsDivide
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
