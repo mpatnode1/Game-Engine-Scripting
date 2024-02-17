@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 namespace Battleship
 {
@@ -63,9 +64,28 @@ namespace Battleship
                 Instantiate(cellPrefab, gridRoot);
             }
 
+            //Shuffle();
             SelectCurrentCell();
             InvokeRepeating("IncrementTime", 1f, 1f);
         }
+
+        /*
+         * 
+         * tried to randomize grid, realized I don't know how to use this shuffle
+         * with a 2d array
+        //uses Knuth shuffle to randomize cells each time scene starts
+        public void Shuffle()
+        {
+            int[,] n = grid;
+            while(n > 1)
+            //for (int i = 0; i <grid.Length; i++)
+            {
+                int temp = grid[n];
+                int j = Random.Range(n, grid.Length);
+                grid[n] = grid[j];
+                grid[j] = temp;
+            }
+        }*/
 
         Transform GetCurrentCell()
         {
@@ -211,5 +231,12 @@ namespace Battleship
             //mm should only display as many digits that are necessary
             timeLabel.text = string.Format("{0}:{1}", time / 60, (time % 60).ToString("00"));
         }
+
+        public void Restart()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
+
+    
 }
