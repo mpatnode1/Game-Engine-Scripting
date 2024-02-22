@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HanoiTower : MonoBehaviour
 {
@@ -15,30 +16,39 @@ public class HanoiTower : MonoBehaviour
     [SerializeField] private int currentPeg = 1;
 
     [ContextMenu("Move Right")]
-    
     public void MoveRight()
     {
-        //make sure we aren't the right most peg
+        //Make sure we aren't the right most peg
         if (CanMoveRight() == false) return;
 
-        //check to see what index and number are moving from THIS peg
+        //Check to see what index and number we are moving from THIS peg
         int[] fromArray = GetPeg(currentPeg);
         int fromIndex = GetTopNumberIndex(fromArray);
 
         //If there wasn't anything to move then don't try to move
-        if(fromIndex == -1) return;
+        if (fromIndex == -1) return;
 
+        //Check to see where in the peg we are moving to that the number
+        //should be placed into
         int[] toArray = GetPeg(currentPeg + 1);
         int toIndex = GetIndexOfFreeSlot(toArray);
 
+        //If the adjacent peg is FULL then we cannot move anything into it
+        //This probably will never happen since the max number of numbers
+        //we have is the size of each peg
         if (toIndex == -1) return;
 
+        //Lastly check to verify the number we are moving is not larger
+        //than whatever number we may be placing this number on top of
+        //on the adjacent peg
         if (CanAddToPeg(fromArray[fromIndex],toArray) == false) return;
 
+        //If all checks PASS then go ahead and move the number
+        //out of THIS array into the adjacent array
         MoveNumber(fromArray, fromIndex, toArray, toIndex);
 
         Transform disc = PopDiscFromCurrentPeg();
-        Transform toPeg = GetpegTransform(currentPeg + 1);
+        Transform toPeg = GetPegTransform(currentPeg + 1);
 
         disc.SetParent(toPeg);
     }
@@ -58,35 +68,55 @@ public class HanoiTower : MonoBehaviour
 
         if (toIndex == -1) return;
 
+        //Lastly check to verify the number we are moving is not larger
+        //than whatever number we may be placing this number on top of
+        //on the adjacent peg
         if (CanAddToPeg(fromArray[fromIndex], toArray) == false) return;
 
         MoveNumber(fromArray, fromIndex, toArray, toIndex);
 
         Transform disc = PopDiscFromCurrentPeg();
-        Transform toPeg = GetpegTransform(currentPeg + 1);
+        Transform toPeg = GetPegTransform(currentPeg - 1);
 
         disc.SetParent(toPeg);
     }
 
-    Transform PopDiscFromCurrentPeg() 
+    public void IncrementPegNumber()
     {
-        Transform currentPegTransform = GetpegTransform(currentPeg);
+        if (currentPeg < 3)
+        {
+            currentPeg++;
+        }
+        
+    }
+
+    public void DecrementPegNumber()
+    {
+        if (currentPeg > 1)
+        {
+            currentPeg--;
+        }
+    }
+
+    Transform PopDiscFromCurrentPeg()
+    {
+        Transform currentPegTransform = GetPegTransform(currentPeg);
         int index = currentPegTransform.childCount - 1;
         Transform disk = currentPegTransform.GetChild(index);
         return disk;
     }
-    Transform GetpegTransform(int pegNumber)
+
+    Transform GetPegTransform(int pegNumber)
     {
-        /*
-        GameObject pegObject = GameObject.Find("Peg-" + pegNumber.ToString());
-        return pegObject.transform;
-        */
-        
+        //Alternative way to find our peg
+        //GameObject pegObject = GameObject.Find("Peg-" + pegNumber.ToString());
+        //return pegObject.transform;
+
         if (pegNumber == 1) return peg1Transform;
 
         if (pegNumber == 2) return peg2Transform;
 
-        return peg3Transform; 
+        return peg3Transform;
     }
 
     void MoveNumber(int[] fromArr, int fromIndex, int[] toArr, int toIndex)
@@ -103,19 +133,19 @@ public class HanoiTower : MonoBehaviour
         return currentPeg < 3;
     }
 
-    bool CanAddToPeg(int value, int[] peg)
-    {
-        int topNumberIndex = GetTopNumberIndex(peg);
-        if (topNumberIndex == -1) return true;
-
-        int topNumber = peg[topNumberIndex];
-        return topNumber > value;
-    }
-
     bool CanMoveLeft()
     {
         //If peg 2 or 3 then can move right
         return currentPeg > 1;
+    }
+
+    bool CanAddToPeg(int value, int[] peg)
+    {
+        int topNumberIndex = GetTopNumberIndex(peg);
+        if(topNumberIndex == -1) return true;
+
+        int topNumber = peg[topNumberIndex];
+        return topNumber > value;
     }
 
     int[] GetPeg(int pegNumber)
@@ -145,5 +175,10 @@ public class HanoiTower : MonoBehaviour
         }
 
         return -1;
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
