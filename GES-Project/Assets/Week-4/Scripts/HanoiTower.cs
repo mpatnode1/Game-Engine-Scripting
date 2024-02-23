@@ -19,6 +19,8 @@ public class HanoiTower : MonoBehaviour
     [SerializeField] private GameObject peg2SelectedStar;
     [SerializeField] private GameObject peg3SelectedStar;
 
+    [SerializeField] private GameObject WinPopUp;
+
 
     [ContextMenu("Move Right")]
     public void MoveRight()
@@ -56,6 +58,7 @@ public class HanoiTower : MonoBehaviour
         Transform toPeg = GetPegTransform(currentPeg + 1);
 
         disc.SetParent(toPeg);
+        CheckWin();
     }
 
     [ContextMenu("Move Left")]
@@ -84,6 +87,17 @@ public class HanoiTower : MonoBehaviour
         Transform toPeg = GetPegTransform(currentPeg - 1);
 
         disc.SetParent(toPeg);
+        CheckWin();
+    }
+
+    public void CheckWin()
+    {
+        //If all the discs are on peg 3 the player wins
+        //checks for four child objects on peg 3
+        if(peg3Transform.childCount == 4)
+        {
+            WinPopUp.SetActive(true);
+        }
     }
 
     public void IncrementPegNumber()
