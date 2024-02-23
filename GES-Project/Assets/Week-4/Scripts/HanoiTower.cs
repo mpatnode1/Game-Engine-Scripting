@@ -15,6 +15,11 @@ public class HanoiTower : MonoBehaviour
 
     [SerializeField] private int currentPeg = 1;
 
+    [SerializeField] private GameObject peg1SelectedStar;
+    [SerializeField] private GameObject peg2SelectedStar;
+    [SerializeField] private GameObject peg3SelectedStar;
+
+
     [ContextMenu("Move Right")]
     public void MoveRight()
     {
@@ -83,9 +88,13 @@ public class HanoiTower : MonoBehaviour
 
     public void IncrementPegNumber()
     {
+        // Added if statements so player cannot
+        //continue to increase peg number
+        //when 3 is selected
         if (currentPeg < 3)
         {
             currentPeg++;
+            AddSelectedImage();
         }
         
     }
@@ -94,7 +103,11 @@ public class HanoiTower : MonoBehaviour
     {
         if (currentPeg > 1)
         {
+            // Added if statements so player cannot
+            //continue to decrease peg number
+            //when 1 is selected
             currentPeg--;
+            AddSelectedImage();
         }
     }
 
@@ -146,6 +159,31 @@ public class HanoiTower : MonoBehaviour
 
         int topNumber = peg[topNumberIndex];
         return topNumber > value;
+    }
+
+    public void AddSelectedImage()
+    {
+        if(currentPeg == 1)
+        {
+            // put peg 1 last for style
+            // if program is slow loading other two will
+            // disappear before activating a new star
+            peg2SelectedStar.SetActive(false);
+            peg3SelectedStar.SetActive(false);
+            peg1SelectedStar.SetActive(true);
+        }
+        else if(currentPeg == 2)
+        {
+            peg1SelectedStar.SetActive(false);
+            peg3SelectedStar.SetActive(false);
+            peg2SelectedStar.SetActive(true);
+        }
+        else
+        {
+            peg1SelectedStar.SetActive(false);
+            peg2SelectedStar.SetActive(false);
+            peg3SelectedStar.SetActive(true);
+        } 
     }
 
     int[] GetPeg(int pegNumber)
