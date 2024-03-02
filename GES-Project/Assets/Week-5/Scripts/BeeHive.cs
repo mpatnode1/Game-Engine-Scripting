@@ -5,9 +5,6 @@ using TMPro;
 
 public class BeeHive : MonoBehaviour
 {
-    //this should ONLY count down if it has nectar
-    float hiveHoneyProduction = 5f;
-
     int beeStartingCount = 2;
 
     public GameObject beePrefab;
@@ -27,12 +24,7 @@ public class BeeHive : MonoBehaviour
         
             for (int i = 0; i < beeStartingCount; i++)
             {
-                var newBee = Instantiate(beePrefab, this.transform.position, Quaternion.identity);
-                bee = newBee.GetComponent<Bee>();
-
-                newBee.transform.parent = this.transform.parent;
-
-                bee.Init(this);
+                beeCreator();
             }
     }
 
@@ -59,6 +51,26 @@ public class BeeHive : MonoBehaviour
             }
 
         }
+        if (currentHoneyCount == 5)
+        {
+            //when the honey in the hive gets to 5 it creates a new bee
+            //then resets the honey value
+            beeCreator();
+            currentHoneyCount = 0;
+            honeyCountText.text = "Honey Total:" + currentHoneyCount.ToString();
+        }
+    }
+
+    public void beeCreator()
+    {
+        
+            var newBee = Instantiate(beePrefab, this.transform.position, Quaternion.identity);
+            bee = newBee.GetComponent<Bee>();
+
+            newBee.transform.parent = this.transform.parent;
+
+            bee.Init(this);
+        
     }
 
     public void GiveNectar()
