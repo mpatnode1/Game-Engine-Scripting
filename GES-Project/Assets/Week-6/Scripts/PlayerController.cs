@@ -10,7 +10,7 @@ namespace Week6
 
         [SerializeField] float speed = 5.0f;
         [SerializeField] float rotation = 5.0f;
-        [SerializeField] float jump = 10f;
+        [SerializeField] float jump = 1f;
 
         public PlayerControls playerControls;
 
@@ -19,6 +19,8 @@ namespace Week6
         private float cameraRotX = 0f;
         private int rotDir = 0;
         private bool grounded;
+
+        public float gravity = 9.8f;
 
         private InputAction move;
         private InputAction look;
@@ -72,15 +74,21 @@ namespace Week6
             grounded = IsGrounded();
 
             HandleMovement();
+
+            if (grounded == false)
+            {
+                rb.AddRelativeForce(Vector3.down * gravity);
+            }
         }
 
         void HandleMovement()
         {
-            if (grounded == false) return;
 
             Vector2 axis = move.ReadValue<Vector2>();
 
             Vector3 input = (axis.x * transform.right) + (transform.forward * axis.y);
+
+            if (grounded == false) return;
 
             input *= speed;
 
