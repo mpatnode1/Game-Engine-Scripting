@@ -2,24 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WinTrigger : MonoBehaviour
+namespace Week11
 {
-    [SerializeField] GameObject WinScreen;
-
-    // Start is called before the first frame update
-    void Start()
+    public class WinTrigger : MonoBehaviour
     {
-        
-    }
+        //[SerializeField] GameObject WinScreen;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+        // Start is called before the first frame update
+        void Start()
+        {
 
-    private void OnTriggerEnter(Collider other)
-    {
-        WinScreen.SetActive(true);
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            //WinScreen.SetActive(true);
+            GameManager.instance.WinGameOverEvent.Invoke();
+
+        }
     }
 }

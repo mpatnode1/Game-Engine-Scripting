@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class HealthGUI : MonoBehaviour
+namespace Week11
 {
-    // Start is called before the first frame update
-    void Start()
+    public class HealthGUI : MonoBehaviour
     {
-        
-    }
+        // Start is called before the first frame update
+        void Start()
+        {
 
-    // Update is called once per frame
-    void Update()
-    {
-        gameObject.GetComponent<TextMeshProUGUI>().text = "Health: " + PlayerStats.Instance.PlayerHealth;
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            gameObject.GetComponent<TextMeshProUGUI>().text = "Health: " + PlayerStats.Instance.PlayerHealth;
+        }
     }
 }

@@ -3,29 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
-public class CanvasManager : MonoBehaviour
+namespace Week11
 {
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        gameObject.GetComponent<Button>().onClick.AddListener(TaskOnClick);
-    }
 
-    // Update is called once per frame
-    void Update()
+    public class CanvasManager : MonoBehaviour
     {
-        
-    }
 
-    public void Restart()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
+        // Start is called before the first frame update
+        void Start()
+        {
+            //gameObject.GetComponent<Button>().onClick.AddListener(TaskOnClick);
+        }
 
-    void TaskOnClick()
-    {
-        Debug.Log("milkshake");
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+
+        public void Restart()
+        {
+            GameManager.instance.OnRestart.Invoke();
+        }
+        void TaskOnClick()
+        {
+            Debug.Log("milkshake");
+        }
     }
 }

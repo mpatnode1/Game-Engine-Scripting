@@ -30,6 +30,12 @@ public class DoorTrigger : MonoBehaviour
         m_DoorTransform.position = Vector3.Lerp(m_PositionClose, m_PositionOpen, m_Alpha);
     }
 
+    public void DoorOnRestart()
+    {
+        m_IsOpening = false;
+        m_DoorTransform.position = m_PositionClose;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         //if (other.gameObject.name == "Player") other.GetComponent<week6.Player>().Damage();

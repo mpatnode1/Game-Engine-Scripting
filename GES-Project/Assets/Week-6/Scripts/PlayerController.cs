@@ -156,6 +156,12 @@ namespace Week6
             if (grounded == false) return;
             rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
         }
+
+        public void restartPosition()
+        {
+            gameObject.transform.position = new Vector3(1953, 890, -3422);
+
+        }
     }
 }
 

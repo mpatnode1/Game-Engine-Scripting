@@ -6,7 +6,7 @@ public class DiamondDoorTrigger : MonoBehaviour
 {
 
     private Animator doorAnim;
-    private bool doorOpen = false;
+    public bool doorOpen = false;
 
     [SerializeField] GameObject DiamondDoor;
     [SerializeField] GameObject CorrectKey;
@@ -21,6 +21,12 @@ public class DiamondDoorTrigger : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void DoorsOnRestart()
+    {
+        doorOpen = false;
+        doorAnim.Play("CloseDoor");
     }
 
     private void OnTriggerEnter(Collider other)
