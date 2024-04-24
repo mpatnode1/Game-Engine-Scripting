@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -25,17 +26,24 @@ namespace CharacterEditor
 
         void NextMaterial()
         {
-            //TODO: Add 1 to the value of id and if it is 3 or more then reset back to 0
-            if (id > 3)
+            
+            //PLEASE READ: I'm not sure if I'm missing something but
+            //only the arms in the MaterialManager have a case 0,
+            //everything else has case 1-3
+            //I changed it in my version of the code to be a 1
+            //and used an id 1 for the else statement
+
+            if (id < 3)
             {
                 id++;
             }
             else
             {
-                id = 0;
+                //id = 0;
+                id = 1;
             }
 
-            //TODO: Make a switch case for each BodyType and save the value of id to the correct PlayerPref
+            //switch case for each BodyType and save the value of id to the correct PlayerPref
             switch (bodyType)
             {
                 case BodyTypes.Arm:
@@ -58,7 +66,7 @@ namespace CharacterEditor
                 break;
                 case BodyTypes.Leg:
                     {
-                        PlayerPrefs.SetInt("Arm", id);
+                        PlayerPrefs.SetInt("Leg", id);
                         PlayerPrefs.Save();
                     }
                 break;
@@ -71,10 +79,10 @@ namespace CharacterEditor
         }
 
         void NextBodyPart()
-        {     
+        {
             //TODO: Setup a switch case that will go through the different body types
             //      ie if the current type is Head and we click next then set it to Body
-            switch(bodyType)
+            switch (bodyType)
             {
                 case BodyTypes.Head:
                     {

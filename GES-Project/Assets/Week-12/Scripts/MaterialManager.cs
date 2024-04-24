@@ -47,9 +47,9 @@ namespace CharacterEditor
         {
             switch (id)
             {
-                case 0: return m_Arm01;
-                case 1: return m_Arm02;
-                case 2: return m_Arm03;
+                case 1: return m_Arm01;
+                case 2: return m_Arm02;
+                case 3: return m_Arm03;
                 default: return m_Arm01;
             }
         }
@@ -71,7 +71,7 @@ namespace CharacterEditor
             {
                 case 1: return m_Head01;
                 case 2: return m_Head02;
-                case 3: return m_Head02;
+                case 3: return m_Head03;
                 default: return m_Head03;
             }
         }

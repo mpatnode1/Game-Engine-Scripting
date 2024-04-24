@@ -8,6 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Week-6/Scenes/Maze.unity
     guid: df96e27196cee4c01bec6b60b504dfc2
+  - enabled: 1
+    path: Assets/Week-12/Scenes/Game.unity
+    guid: 0b8d287f647234d79a30e4b9039a11f9
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: a3732f1c7b849411a97214942d233439, type: 2}
   m_UseUCBPForAssetBundles: 0
